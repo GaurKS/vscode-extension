@@ -1,16 +1,21 @@
 import * as vscode from "vscode";
+import { AuthView } from "./authView";
 
 export function activate(context: vscode.ExtensionContext) {
   let NEXT_TERM_ID = 1;
-  let createDeployButton = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
+  let createDeployButton = vscode.window.createStatusBarItem(
+    vscode.StatusBarAlignment.Right, 
+    100
+  );
   createDeployButton.command = 'metacall.createDeploy';
-  createDeployButton.text = 'Deploy as Faas';
+  createDeployButton.text = 'Deploy on Faas';
   createDeployButton.show();
   context.subscriptions.push(createDeployButton);
 
   console.log("Terminals: " + (<any>vscode.window).terminals.length);
   console.log('Congratulations, your extension "MetaCall" is now active!');
 
+  // command to create a new terminal and run a command in it (metacall-deploy)
   context.subscriptions.push(
     vscode.commands.registerCommand("metacall.helloWorld", () => {
       vscode.window.showInformationMessage(
@@ -19,6 +24,7 @@ export function activate(context: vscode.ExtensionContext) {
     })
   );
 
+  // command to create a new terminal and run a command in it (metacall-deploy)
   context.subscriptions.push(
     vscode.commands.registerCommand('metacall.help', () => {
 			if (ensureTerminalExists()) {
@@ -39,6 +45,7 @@ export function activate(context: vscode.ExtensionContext) {
 		})
   );
 
+  // command to create a new terminal and run a command in it (metacall-deploy)
   context.subscriptions.push(
 		vscode.commands.registerCommand('metacall.createDeploy', () => {
 			if (ensureTerminalExists()) {
